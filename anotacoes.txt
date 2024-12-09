@@ -1,0 +1,10 @@
+Sistema
+implementar:  
+    sistema de tempo que consome energia e diminui a vida a cada tique
+    botão que avança no tempo
+
+interações
+
+ao colidir: ficar preso por uma fração de tempo
+ao colidir: gerar filhote/ ou consumir o outro animal para aumentar a vida / ou consumir a alga
+

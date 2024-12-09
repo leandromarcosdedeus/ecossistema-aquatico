@@ -20,18 +20,24 @@ class Herbivoro(Animal):
         self.posicao_y = random.randint(0, self.altura_da_tela - self.imagem.get_height())
         
         self.tipo = 'Herbivoro'
-        self.velocidade = random.choice((1, 2, 3))
+        self.velocidade = random.choice((1, 1.5, 2))
         self.frame_atual = 0  # Índice do quadro atual da animação
-        self.tempo_mudanca = 200  # Tempo para trocar de imagem (em milissegundos)
+        self.tempo_mudanca = 300  # Tempo para trocar de imagem (em milissegundos)
         self.ultimo_tempo = pygame.time.get_ticks()  # Marca o tempo atual
+        self.energia = 1000
+
 
     def mover(self):
         self.posicao_x += self.velocidade
+        if self.energia < 500:
+            self.velocidade = 1
         if self.posicao_x + self.imagem.get_width() > self.largura_da_tela:
             self.posicao_x = 0
             self.posicao_y += 50
         elif self.posicao_y + self.imagem.get_width() > self.altura_da_tela:
             self.posicao_y = 0
+        self.energia = self.energia - 10
+        print(self.energia)
 
     def trocar_sprite(self):
         # Verificar se é hora de trocar de imagem
