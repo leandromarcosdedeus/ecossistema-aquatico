@@ -29,15 +29,13 @@ class Herbivoro(Animal):
 
     def mover(self):
         self.posicao_x += self.velocidade
-        if self.energia < 500:
-            self.velocidade = 1
+        """ if self.energia < 1:
+            self.velocidade = 1 """
         if self.posicao_x + self.imagem.get_width() > self.largura_da_tela:
             self.posicao_x = 0
             self.posicao_y += 50
         elif self.posicao_y + self.imagem.get_width() > self.altura_da_tela:
             self.posicao_y = 0
-        self.energia = self.energia - 10
-        print(self.energia)
 
     def trocar_sprite(self):
         # Verificar se é hora de trocar de imagem
@@ -60,7 +58,7 @@ class Herbivoro(Animal):
         randomC = random.choice([1, 2, 3, 4, 5])  
         animal = ''
         if randomC == 1:
-            animal = 'Tubarao'
+            animal = 'Peixe2'
         elif randomC == 2:
             animal = 'Peixe1'
         elif randomC == 3:
@@ -72,3 +70,7 @@ class Herbivoro(Animal):
         
         for i in range(0, 4):  
             self.sprites.append(pygame.image.load(f'src/img/{animal}/sprite_{i + 1}.png'))
+
+    def verificar_colisao(self, planta):
+        distancia = ((self.posicao_x - planta.posicao_x) ** 2 + (self.posicao_y - planta.posicao_y) ** 2) ** 0.5
+        return distancia < 25 

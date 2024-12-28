@@ -1,7 +1,7 @@
 Sistema
 implementar:  
-    sistema de tempo que consome energia e diminui a vida a cada tique
-    botão que avança no tempo
+    botao: sistema de tempo que consome energia e diminui a vida a cada tique
+    botão: que avança no tempo
 
 interações
 
