@@ -14,7 +14,7 @@ class Herbivoro(Animal):
         self.tamanho_sprite = 100
         # Tamanho inicial ideal
         self.imagem = pygame.transform.scale(self.sprites[0], (self.tamanho_sprite / 2, self.tamanho_sprite / 2))  # Primeira imagem (sprite_1)
-
+        self.frente = 0
         # Posição inicial aleatória
         self.posicao_x = random.randint(0, self.largura_da_tela - self.imagem.get_width())
         self.posicao_y = random.randint(0, self.altura_da_tela - self.imagem.get_height())
@@ -26,16 +26,31 @@ class Herbivoro(Animal):
         self.ultimo_tempo = pygame.time.get_ticks()  # Marca o tempo atual
         self.energia = 1000
 
-
     def mover(self):
-        self.posicao_x += self.velocidade
-        """ if self.energia < 1:
-            self.velocidade = 1 """
+        # Atualizar a posição horizontal
+        if self.frente == 0:
+            self.posicao_x += self.velocidade
+        else:
+            self.posicao_x -= self.velocidade
+
+        # Verificar se atingiu a borda horizontal
         if self.posicao_x + self.imagem.get_width() > self.largura_da_tela:
-            self.posicao_x = 0
-            self.posicao_y += 50
-        elif self.posicao_y + self.imagem.get_width() > self.altura_da_tela:
+            self.posicao_x = self.largura_da_tela - self.imagem.get_width()  # Corrigir posição
+            # Aleatoriamente decidir mover para cima ou para baixo e mudar direção
+            self.posicao_y += 50 if random.choice([True, False]) else -50
+            self.frente = 1  # Mudar direção para trás
+        elif self.posicao_x < 0:
+            self.posicao_x = 0  # Corrigir posição
+            # Aleatoriamente decidir mover para cima ou para baixo e mudar direção
+            self.posicao_y += 50 if random.choice([True, False]) else -50
+            self.frente = 0  # Mudar direção para frente
+
+        # Garantir que o herbívoro não ultrapasse os limites verticais
+        if self.posicao_y < 0:
             self.posicao_y = 0
+        elif self.posicao_y + self.imagem.get_height() > self.altura_da_tela:
+            self.posicao_y = self.altura_da_tela - self.imagem.get_height()
+
 
     def trocar_sprite(self):
         # Verificar se é hora de trocar de imagem
