@@ -21,10 +21,10 @@ class Carnivoro(Animal):
         
         self.tipo = 'Carnivoro'
         self.velocidade = random.choice((1, 1.5, 2))
-        self.frame_atual = 0  # Índice do quadro atual da animação
-        self.tempo_mudanca = 300  # Tempo para trocar de imagem (em milissegundos)
-        self.ultimo_tempo = pygame.time.get_ticks()  # Marca o tempo atual
-        self.energia = 1000
+        self.frame_atual = 0  
+        self.tempo_mudanca = 300  
+        self.ultimo_tempo = pygame.time.get_ticks()  
+        self.energia = 10
 
 
     def mover(self):
